@@ -2,13 +2,15 @@ import fs from "node:fs";
 import express from "express";
 
 const app = express();
-const host = "localhost";
 const port = 3000;
 
 let stoicQuotes = null;
 
 function getRandomQuote() {
-  return stoicQuotes[Math.round(stoicQuotes.length * Math.random())];
+  return {
+    ...stoicQuotes[Math.round(stoicQuotes.length * Math.random())],
+    type: "quote",
+  };
 }
 
 fs.readFile("./src/quotes.json", "utf8", (err, data) => {
@@ -21,21 +23,27 @@ fs.readFile("./src/quotes.json", "utf8", (err, data) => {
 });
 
 app.get("/", (req, res) => {
-  if (!stoicQuotes) return res.status(500).send("No quotes...");
+  if (!stoicQuotes)
+    return res
+      .status(500)
+      .type("application/json")
+      .send({ status: false, message: "No quotes found.", type: "error" });
 
   res.status(200).type("application/json");
-  console.log("Stoic Quote Server:", { status: true });
-  res.send(JSON.stringify({ status: true }));
+  res.send(JSON.stringify({ status: true, type: "status" }));
 });
 
 app.get("/random", (req, res) => {
-  if (!stoicQuotes) return res.status(500).send("No qoutes...");
+  if (!stoicQuotes)
+    return res
+      .status(500)
+      .type("application/json")
+      .send({ status: false, message: "No quotes found.", type: "error" });
 
   res.status(200).type("application/json");
-
   res.send(JSON.stringify(getRandomQuote()));
 });
 
 app.listen(port, "0.0.0.0", function () {
-  console.log(`Stoic Quote Server listens http://${host}:${port}`);
+  console.log(`Stoic Quote Server listens port:${port}`);
 });
