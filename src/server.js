@@ -36,6 +36,6 @@ app.get("/random", (req, res) => {
   res.send(JSON.stringify(getRandomQuote()));
 });
 
-app.listen(port, host, function () {
+app.listen(port, "0.0.0.0", function () {
   console.log(`Stoic Quote Server listens http://${host}:${port}`);
 });
