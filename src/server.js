@@ -21,7 +21,7 @@ fs.readFile("./src/quotes.json", "utf8", (err, data) => {
 });
 
 app.get("/", (req, res) => {
-  if (!stoicQuotes) return res.status(500).send("No qoutes...");
+  if (!stoicQuotes) return res.status(500).send("No quotes...");
 
   res.status(200).type("application/json");
   console.log("Stoic Quote Server:", { status: true });
