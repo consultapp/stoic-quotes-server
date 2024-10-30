@@ -1,5 +1,5 @@
 services:
-  frontend:
+  server:
     image: test7778/stoic-quotes-server
     ports:
       - "3100:3000"
