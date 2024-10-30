@@ -1,0 +1,23 @@
+{
+  "name": "stoic-quotes-server",
+  "private": false,
+  "version": "1.0.0",
+  "type": "module",
+  "author": {
+    "name": "Egorov Dmitry",
+    "email": "info@consultapp.ru"
+  },
+  "scripts": {
+    "dbuild": "docker build -t test7778/stoic-quotes-server .",
+    "dpush": "docker push test7778/stoic-quotes-server",
+    "drun": "docker run -d --rm  --name stoic-quotes-server -p 3000:3000 test7778/stoic-quotes-server",
+    "dstop": "docker stop stoic-quotes-server",
+    "dlog": "docker logs -f stoic-quotes-server",
+    "du": "git pull && npm run dbuild & npm run dpush",
+    "dev": "node src/server.js",
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
