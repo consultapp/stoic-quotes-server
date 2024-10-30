@@ -1,0 +1,7 @@
+services:
+  frontend:
+    image: test7778/stoic-quotes-server
+    ports:
+      - "3100:3000"
+    environment:
+      - NODE_ENV=production

@@ -13,11 +13,6 @@ COPY . .
 ENV PORT=3000
 ENV NODE_ENV=production
 
-# RUN npm run start
-ENTRYPOINT npm run start
-
 EXPOSE $PORT
 
-
-
-
+ENTRYPOINT npm run start
